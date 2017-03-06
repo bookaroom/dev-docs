@@ -1,0 +1,46 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# comeet
+
+Comeet API
+
+## Rooms Collection [/rooms]
+### List Rooms [GET]
++ Response 200 (application/json)
+    + Attributes
+        + rooms (array[room])
+
+## Meetings Collection [/{user}/meetings]
+### List Rooms [GET]
++ Response 200 (application/json)
+    + Attributes
+        + meetings (array[meeting])
+
+# Data Structures
+
+## room (object)
++ name: Building 11 (string, required) - User facing string of the room's name
++ email: Bldg11rooms@contoso.com (string, required) - The room's exchange email
++ address: 300 Main St (string) - User facing string address of the meeting room
++ country: USA (string) - User facing country of the meeting room
++ state: WA (string) - User facing state of the meeting room
++ metroarea: Seattle (string) - User facing string of the city or metroarea of the meeting room 
++ latitude: 47.652058 (string) - Latitude of the location of the mmeting room
++ longitude: `-122.355165` (string) - Longitude of the location of the mmeting room
++ capacity: 10 (number) - Maximum number of seated occupants at the meeting room
+
+## user (object)
++ name: Dairai Nyabando (string, required) - User facing string of the user's name
++ email: dairai@exchange.com (string, required) - The user's exchange email
+
+## meeting (object)
++ subject: Team building exercise (string, required) - User facing string of the meeting's subject
++ body: Let's learn to really work as a team and then have lunch! (string, required) - User facing string of the meeting's body
++ start: `2017-04-22 16:00:00` (string, required) - Start date of the meeting with YYYY-MM-DD HH:MI:Sec format
++ end: `2017-04-22 16:00:00` (string, required) - End date of the meeting with YYYY-MM-DD HH:MI:Sec format
++ location: Conference Room 12 (string) - User facing string of the meeting's location
++ room (room)
++ metingcreator (user)
++ requiredattendees (array[user])
++ optionalattendees (array[user])
