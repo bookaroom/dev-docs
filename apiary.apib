@@ -5,18 +5,54 @@ HOST: http://polls.apiblueprint.org/
 
 API documentation for the comeet App and Backend.
 
-## Rooms Collection [/rooms]
+## Rooms Collection [/{organization}/rooms]
 ### List Rooms [GET]
 + Response 200 (application/json)
     + Attributes (array)
         + (room)
         + (room)
 
-## Meetings Collection [/{user}/meetings]
+## Seacrch Criteria Collection [/{organization}/searchCriteria]
+### Seacrch Criteria [GET]
++ Response 200 (application/json)
+    + Attributes (array)
+        + (city)
+        
+
+## Search Rooms Collection [/{organization}/{city}/{roomslist}/rooms]
+### Search Rooms [GET]
++ Response 200 (application/json)
+    + Attributes (array)
+        + (room)
+        + (room)
+
+## Book Room Collection [/{organization}/rooms/{room}]
+### Search Rooms [POST]
++ Request (application/json)
+
+        { 
+            "name" : "Plan architecture for new project",
+            "description" : "Let's get together to brainstorm the archteture for the new project"
+            "start" : "2017-04-22 16:00:00"
+            "start" : "2017-04-22 16:00:00"
+            "atendees" :
+            [
+                "atendee1@exchange.com",
+                "atendee2@exchange.com"
+            ]
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "success" : true
+        }
+
+## Meetings Collection [/{organization}/{user}/meetings]
 ### List Meetings [GET]
 + Response 200 (application/json)
-    + Attributes
-        + meetings (array[meeting])
+    + Attributes (array)
+        + (meeting)
 
 # Data Structures
 
@@ -30,6 +66,10 @@ API documentation for the comeet App and Backend.
 + latitude: 47.652058 (string) - Latitude of the location of the mmeting room
 + longitude: `-122.355165` (string) - Longitude of the location of the mmeting room
 + capacity: 10 (number) - Maximum number of seated occupants at the meeting room
++ picture: http://www.thelongemonthotels.com/d/longemont/media/optimised_images/Club_Lounge_Meeting_Room.jpg (string) - Picture of the meeting room
++ navigation: http://www.chelseatoronto.com/en/uploads/images/2015/08/deluxe-room-king-new.jpg (string) - map to the meeting room
++ amenities (array[amenity, amenity]) - amenities array for the room
++ freebusy (array[freebusystatus])
 
 ## user (object)
 + name: Dairai Nyabando (string, required) - User facing string of the user's name
@@ -39,9 +79,28 @@ API documentation for the comeet App and Backend.
 + subject: Team building exercise (string, required) - User facing string of the meeting's subject
 + body: Let's learn to really work as a team and then have lunch! (string, required) - User facing string of the meeting's body
 + start: `2017-04-22 16:00:00` (string, required) - Start date of the meeting with YYYY-MM-DD HH:MI:Sec format
-+ end: `2017-04-22 16:00:00` (string, required) - End date of the meeting with YYYY-MM-DD HH:MI:Sec format
++ end: `2017-04-22 16:30:00` (string, required) - End date of the meeting with YYYY-MM-DD HH:MI:Sec format
 + location: Conference Room 12 (string) - User facing string of the meeting's location
 + room (room)
 + metingcreator (user)
 + requiredattendees (array[user])
 + optionalattendees (array[user])
+
+## city (object)
++ name: Los Angeles (string, required) - The city name
++ roomslists (array[roomslist,roomslist])
+
+## roomslist (object)
++ name: MainBuilding (string, required) - The rooms list name
+
+##amenity (object)
++ name: projector (string) - name of the projector
++ description: projector with DVI and HDMI
+
+##freebusystatus (object)
++ status: busy (string, required) - status can be busy or free
++ start: `2017-04-22 16:00:00` (string, required) - Start date of the freebusy block with YYYY-MM-DD HH:MI:Sec format
++ end: `2017-04-22 16:30:00` (string, required) - End date of the freebusy block with YYYY-MM-DD HH:MI:Sec format
+
+##sucessstatus (object)
++ success: true (boolean, required) - success status
