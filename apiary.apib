@@ -11,12 +11,14 @@ API documentation for the comeet App and Backend.
     + Attributes (array)
         + (room)
         + (room)
-
-## Seacrch Criteria Collection [/{organization}/searchCriteria]
+    
+## Seacrch Criteria Collection [/{organization}/searchcriteria]
 ### Seacrch Criteria [GET]
 + Response 200 (application/json)
     + Attributes (array)
-        + (city)
+        + (searchcriteria)
+        + (searchcriteriaNY)
+        + (searchcriteriaSEA)
         
 
 ## Search Rooms Collection [/{organization}/{city}/{roomslist}/rooms]
@@ -27,7 +29,7 @@ API documentation for the comeet App and Backend.
         + (room)
 
 ## Book Room Collection [/{organization}/rooms/{room}]
-### Search Rooms [POST]
+### Book Room [POST]
 + Request (application/json)
 
         { 
@@ -57,8 +59,8 @@ API documentation for the comeet App and Backend.
 # Data Structures
 
 ## room (object)
-+ name: Building 11 (string, required) - User facing string of the room's name
-+ email: Bldg11rooms@contoso.com (string, required) - The room's exchange email
++ name: Brainstorming Room (string, required) - User facing string of the room's name
++ email: brainstorming@contoso.com (string, required) - The room's exchange email
 + address: 300 Main St (string) - User facing string address of the meeting room
 + country: USA (string) - User facing country of the meeting room
 + state: WA (string) - User facing state of the meeting room
@@ -67,7 +69,7 @@ API documentation for the comeet App and Backend.
 + longitude: `-122.355165` (string) - Longitude of the location of the mmeting room
 + capacity: 10 (number) - Maximum number of seated occupants at the meeting room
 + picture: http://www.thelongemonthotels.com/d/longemont/media/optimised_images/Club_Lounge_Meeting_Room.jpg (string) - Picture of the meeting room
-+ navigation: http://www.crowneplazaadelaide.com.au/wp-content/uploads/2012/09/cpa-floor-plan.jpg (string) - map to the meeting room
++ navigation: `http://www.graindesigners.com/images-cdn/2015/10/17/dental-office-floor-plan-design-samples-dental-office-interior-design.jpg` (string) - map to the meeting room
 + amenities (array[amenity, amenity]) - amenities array for the room
 + freebusy (array[freebusystatus])
 
@@ -86,16 +88,21 @@ API documentation for the comeet App and Backend.
 + requiredattendees (array[user])
 + optionalattendees (array[user])
 
-## city (object)
-+ name: Los Angeles (string, required) - The city name
-+ roomslists (array[roomslist,roomslist])
+## searchcriteria (object)
++ metroarea: Los Angeles CA (string, required) - The city name
++ roomslists: Santa Monica Office, Downtown Park, Sunset Office, Culver City Park
 
-## roomslist (object)
-+ name: MainBuilding (string, required) - The rooms list name
+## searchcriteriaNY (object)
++ metroarea: New York NY (string, required) - The city name
++ roomslists: Brooklyn Office, Downtown Building, Queens Building, Lower East Side Shop
+
+## searchcriteriaSEA (object)
++ metroarea: Seattle WA (string, required) - The city name
++ roomslists: Downtown Building, South Lake Union Building, Fremont Office, Bellevue Office
 
 ##amenity (object)
-+ name: projector (string) - name of the projector
-+ description: projector with DVI and HDMI
++ name: projector (string, required) - name of the amenity
++ description: projector with DVI and HDMI (string, required) - description of the amenity
 
 ##freebusystatus (object)
 + status: busy (string, required) - status can be busy or free
