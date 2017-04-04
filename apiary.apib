@@ -17,6 +17,9 @@ API documentation for the comeet App and Backend.
 ### Metro Areas [GET]
 + Parameters
     + organization - The user's organization
+    {
+      "organization": "meetl.ink"
+    }
     
 + Response 200 (application/json)
 
@@ -52,24 +55,15 @@ API documentation for the comeet App and Backend.
     + organization - The user's organization
     + roomrecipient - The email address of the room to reserve
     
-+ Request (application/json)
-
-        { 
-            "subject" : "Plan architecture for new project",
-            "body" : "Let's get together to brainstorm the archteture for the new project",
-            "start" : "2017-04-20T16:00:00Z",
-            "end" : "2017-04-22T16:00:00Z",
-            "required" :
-            [
-                "requiredAttendee1@exchange.com",
-                "requiredAttendee2@exchange.com"
-            ],
-            "optional" :
-            [
-                "optionalAttendee1@exchange.com",
-                "optionalAttendee2@exchange.com"
-            ]
-        }
++ Attributes
+    + start - Meeting start time (e.g. 2017-04-24T09:00:00-0400)
+    + end - Meeting end time (e.g. 2017-04-24T10:00:00-0400)
+    + subject - Meeting title
+    + body - Meeting description
+    + required - Required attendees (including room email)
+    + optional - Optional attendees
+    
++ Request (application/x-www-form-urlencoded)
         
 + Response 200 (application/json)
 
