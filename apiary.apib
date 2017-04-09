@@ -26,13 +26,13 @@ API documentation for the comeet App and Backend.
         [ {
           "metro" : "Boston-MA",
           "roomlists" : {
-            "Bldg_CambMaOneStorySt@meetl.ink" : "One Story St Office",
-            "Bldg_CambMaTwoStorySt@meetl.ink" : "Two Story St Office"
+            "Bldg_CambMaOneStoryStmeetl.ink" : "One Story St Office",
+            "Bldg_CambMaTwoStoryStmeetl.ink" : "Two Story St Office"
           }
         }, {
           "metro" : "Seattle-WA",
           "roomlists" : {
-            "Bldg_CambMALoeb@meetl.ink" : "Loeb building"
+            "Bldg_CambMALoebmeetl.ink" : "Loeb building"
           }
         } ]
 
@@ -71,12 +71,14 @@ API documentation for the comeet App and Backend.
             "success" : true
         }
 
-## Meetings Collection [/{organization}/users/{user}/meetings]
+## Meetings Collection [/{organization}/users/{user}/meetings{?start,end}]
 ### List Meetings [GET]
 + Parameters
     + organization - The user's organization
     + user - The email address of the user to get calendar info
-    
+    + start (optional) - Start time for range (iso 8601)
+    + end  (optional) - End time for range (iso 8601)
+
 + Response 200 (application/json)
     + Attributes (array)
         + (meeting)
@@ -86,7 +88,7 @@ API documentation for the comeet App and Backend.
 
 ## room (object) 
 + name: Brainstorming Room (string, required) - User facing string of the room's name
-+ email: brainstorming@contoso.com (string, required) - The room's exchange email
++ email: brainstormingcontoso.com (string, required) - The room's exchange email
 + address: 300 Main St (string) - User facing string address of the meeting room
 + country: USA (string) - User facing country of the meeting room
 + state: WA (string) - User facing state of the meeting room
@@ -108,17 +110,17 @@ API documentation for the comeet App and Backend.
 ## meeting (object)
 + subject: Team building exercise (string, required) - User facing string of the meeting's subject
 + body: Let's learn to really work as a team and then have lunch! (string, required) - User facing string of the meeting's body
-+ start: `2017-04-22 16:00:00` (string, required) - Start date of the meeting with YYYY-MM-DD HH:MI:Sec format
-+ end: `2017-04-22 16:30:00` (string, required) - End date of the meeting with YYYY-MM-DD HH:MI:Sec format
++ start: `2017-04-24T09:00:00-0400` (string, required) - Start date of the meeting (iso 8601)
++ end: `2017-04-24T09:30:00-0400` (string, required) - End date of the meeting (iso 8601)
 + location: Conference Room 12 (string) - User facing string of the meeting's location
-+ room (room)
-+ metingcreator (user)
++ room (room, required)
++ metingcreator (user, required)
 + requiredattendees (array[user])
 + optionalattendees (array[user])
 
 ## searchcriteria (object)
 + metroarea: Los Angeles CA (string, required) - The city name
-+ roomlists: [building1@email.com:Seattle-WA,building2@email.com:Cambridge-MA]
++ roomlists: [building1email.com:Seattle-WA,building2email.com:Cambridge-MA]
 //+ roomslists: Santa Monica Office, Downtown Park, Sunset Office, Culver City Park
 
 ## searchcriteriaNY (object)
@@ -136,9 +138,9 @@ API documentation for the comeet App and Backend.
 + description: projector with DVI and HDMI (string, required) - description of the amenity
 
 ##freebusystatus (object)
-+ status: busy (string, required) - status can be busy or free
-+ start: `2017-04-22 16:00:00` (string, required) - Start date of the freebusy block with YYYY-MM-DD HH:MI:Sec format
-+ end: `2017-04-22 16:30:00` (string, required) - End date of the freebusy block with YYYY-MM-DD HH:MI:Sec format
++ status: free (string, required) - status can be busy or free
++ start: `2017-04-24T01:00:00-0400` (string, required) - Start date of the freebusy block (iso 8601)
++ end: `2017-04-25T01:00:00-0400` (string, required) - End date of the freebusy block (iso 8601)
 
 ##sucessstatus (object)
 + success: true (boolean, required) - success status
