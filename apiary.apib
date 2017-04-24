@@ -71,17 +71,29 @@ API documentation for the comeet App and Backend.
             "success" : true
         }
 
-## Meetings Collection [/{organization}/users/{user}/meetings{?start,end}]
+## Meetings Collection [/{organization}/meetings{?start,end}]
 ### List Meetings [GET]
 + Parameters
     + organization - The user's organization
-    + user - The email address of the user to get calendar info
     + start (optional) - Start time for range (iso 8601)
     + end  (optional) - End time for range (iso 8601)
 
 + Response 200 (application/json)
     + Attributes (array)
         + (meeting)
+        
+        
+## Attendees Collection [/{organization}/meetings/attendees]
+### Get Attendees [POST]
++ Parameters
+    + organization - The user's organization
+
++ Attributes
+    + id - Meeting ID
+
++ Response 200 (application/json)
+    + Attributes (array)
+        + (attendees)
 
 # Data Structures
 
@@ -108,15 +120,18 @@ API documentation for the comeet App and Backend.
 + email: dairai@exchange.com (string, required) - The user's exchange email
 
 ## meeting (object)
++ id: 34764dgs4563 (string) - unique id for a meeting
 + subject: Team building exercise (string, required) - User facing string of the meeting's subject
 + body: Let's learn to really work as a team and then have lunch! (string, required) - User facing string of the meeting's body
-+ start: `2017-04-24T09:00:00-0400` (string, required) - Start date of the meeting (iso 8601)
-+ end: `2017-04-24T09:30:00-0400` (string, required) - End date of the meeting (iso 8601)
++ start: `2017-04-12T09:00:00-0400` (string, required) - Start date of the meeting (iso 8601)
++ end: `2017-04-12T09:30:00-0400` (string, required) - End date of the meeting (iso 8601)
 + location: Conference Room 12 (string) - User facing string of the meeting's location
 + room (room, required)
-+ metingcreator (user, required)
-+ requiredattendees (array[user])
-+ optionalattendees (array[user])
++ meetingcreator (user, required)t
+
+## attendees (object)
++ requiredattendees (array[user]) - people who have to come
++ optionalattendees (array[user]) - people who don't have to come
 
 ## searchcriteria (object)
 + metroarea: Los Angeles CA (string, required) - The city name
